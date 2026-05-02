@@ -427,6 +427,7 @@
                     <div class="text-4xl mb-4"><i class="fa-solid fa-tags"></i></div>
                     <h4 data-i18n="why_6" class="font-heading font-bold text-lg uppercase">Competitive Price</h4>
                 </div>
+                </div>
             </div>
         </div>
     </section>
@@ -443,23 +444,21 @@
 
                 <div class="space-y-6">
                     <div class="flex items-start space-x-4">
-                        <div
-                            class="bg-industrial-orange w-12 h-12 flex items-center justify-center rounded-sm shrink-0">
+                        <div class="bg-industrial-orange w-12 h-12 flex items-center justify-center rounded-sm shrink-0">
                             <i class="fa-solid fa-user-tie text-xl"></i>
                         </div>
                         <div>
                             <h4 data-i18n="cont_owner" class="font-heading text-xl font-bold">Name</h4>
-                            <p class="text-gray-400">Jignesh Gajjar</p>
+                            <p class="text-gray-400 text-lg">Jignesh Gajjar</p>
                         </div>
                     </div>
                     <div class="flex items-start space-x-4">
-                        <div
-                            class="bg-industrial-orange w-12 h-12 flex items-center justify-center rounded-sm shrink-0">
+                        <div class="bg-industrial-orange w-12 h-12 flex items-center justify-center rounded-sm shrink-0">
                             <i class="fa-solid fa-phone text-xl"></i>
                         </div>
                         <div>
                             <h4 data-i18n="cont_call" class="font-heading text-xl font-bold">Call Us</h4>
-                            <p class="text-gray-400">+91 9924005319</p>
+                            <a href="tel:+919924005319" class="text-2xl font-bold hover:text-industrial-orange transition-colors">+91 99240 05319</a>
                         </div>
                     </div>
                     <div class="flex items-start space-x-4">
@@ -467,66 +466,29 @@
                             <i class="fa-brands fa-whatsapp text-2xl"></i>
                         </div>
                         <div>
-                            <h4 data-i18n="cont_wa" class="font-heading text-xl font-bold">WhatsApp</h4>
-                            <p data-i18n="cont_wa_p" class="text-gray-400">Message for quick estimate</p>
-                            <a href="https://wa.me/919924005319" data-i18n="cont_chat"
-                                class="text-industrial-orange font-bold hover:underline">Chat Now</a>
+                            <h4 class="font-heading text-xl font-bold">WhatsApp</h4>
+                            <a href="https://wa.me/919924005319" target="_blank"
+                                class="text-industrial-orange font-bold hover:underline" data-i18n="cont_chat">Chat Now →</a>
                         </div>
                     </div>
                     <div class="flex items-start space-x-4">
-                        <div
-                            class="bg-industrial-orange w-12 h-12 flex items-center justify-center rounded-sm shrink-0">
+                        <div class="bg-industrial-orange w-12 h-12 flex items-center justify-center rounded-sm shrink-0">
                             <i class="fa-solid fa-location-dot text-xl"></i>
                         </div>
                         <div>
                             <h4 data-i18n="cont_loc" class="font-heading text-xl font-bold">Our Location</h4>
-                            <p data-i18n="cont_loc_p" class="text-gray-400">Plot No. 45, Industrial Area Phase
-                                II,<br>City Name, State - 123456</p>
+                            <p data-i18n="address" class="text-gray-400 text-lg">Near Karan Nagar Railway Crossing Road, Kadi</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-industrial-gray p-8 rounded-sm border border-white/10 reveal"
-                style="transition-delay: 200ms;">
-                <form class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label data-i18n="form_name" class="block text-sm font-bold uppercase mb-2">Name</label>
-                            <input type="text" data-i18n-ph="form_name_ph"
-                                class="w-full bg-industrial-black border border-white/10 px-4 py-3 rounded-sm focus:outline-none focus:border-industrial-orange transition-colors"
-                                placeholder="John Doe">
-                        </div>
-                        <div>
-                            <label data-i18n="form_phone" class="block text-sm font-bold uppercase mb-2">Phone
-                                Number</label>
-                            <input type="tel" data-i18n-ph="form_phone_ph"
-                                class="w-full bg-industrial-black border border-white/10 px-4 py-3 rounded-sm focus:outline-none focus:border-industrial-orange transition-colors"
-                                placeholder="+91 00000 00000">
-                        </div>
-                    </div>
-                    <div>
-                        <label data-i18n="form_req" class="block text-sm font-bold uppercase mb-2">Requirement</label>
-                        <select
-                            class="w-full bg-industrial-black border border-white/10 px-4 py-3 rounded-sm focus:outline-none focus:border-industrial-orange transition-colors">
-                            <option data-i18n="opt_1">MS Fabrication</option>
-                            <option data-i18n="opt_2">SS Fabrication</option>
-                            <option data-i18n="opt_3">Gate & Security</option>
-                            <option data-i18n="opt_4">Shade / Shed Work</option>
-                            <option data-i18n="opt_5">Custom Metalwork</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label data-i18n="form_msg" class="block text-sm font-bold uppercase mb-2">Message</label>
-                        <textarea rows="4" data-i18n-ph="form_msg_ph"
-                            class="w-full bg-industrial-black border border-white/10 px-4 py-3 rounded-sm focus:outline-none focus:border-industrial-orange transition-colors"
-                            placeholder="Tell us about your project..."></textarea>
-                    </div>
-                    <button type="submit" data-i18n="form_btn"
-                        class="w-full bg-industrial-orange hover:bg-white hover:text-industrial-black text-white px-8 py-4 rounded-sm font-heading font-bold text-lg transition-all duration-300">
-                        SEND QUOTE REQUEST
-                    </button>
-                </form>
+            <!-- CTA Panel -->
+            <div class="bg-industrial-gray p-10 rounded-sm border border-white/5 reveal flex flex-col justify-center items-center text-center" style="transition-delay: 200ms;">
+                <div class="text-industrial-orange text-6xl mb-6"><i class="fa-solid fa-hammer"></i></div>
+                <h3 class="font-heading text-3xl font-bold mb-4">Ready to Build?</h3>
+                <p class="text-gray-400 mb-8">Call or WhatsApp us for a free on-site measurement and quote. We will visit your location and give you the best estimate.</p>
+                <a href="tel:+919924005319" class="bg-industrial-orange hover:bg-white hover:text-industrial-black text-white px-10 py-4 rounded-sm font-heading font-bold text-lg transition-all w-full text-center" data-i18n="call_now">CALL NOW</a>
             </div>
         </div>
     </section>
@@ -646,10 +608,11 @@
                 cont_wa: "WhatsApp",
                 cont_wa_p: "Message for quick estimate",
                 cont_chat: "Chat Now",
-                cont_owner: "Name",
-                cont_loc: "Our Location",
-                cont_loc_p: "Plot No. 45, Industrial Area Phase II,<br>City Name, State - 123456",
-                form_name: "Name",
+                cont_whatsapp: "WhatsApp",
+                chat_now: "CHAT NOW",
+                cont_visit: "Visit Us",
+                address: "Near Karan Nagar Railway Crossing Road, Kadi",
+                form_name: "Your Name",
                 form_name_ph: "John Doe",
                 form_phone: "Phone Number",
                 form_phone_ph: "+91 00000 00000",
@@ -737,10 +700,11 @@
                 cont_wa: "WhatsApp",
                 cont_wa_p: "ઝડપી અંદાજ માટે મેસેજ કરો",
                 cont_chat: "ચેટ કરો",
-                cont_owner: "નામ",
-                cont_loc: "અમારું સ્થાન",
-                cont_loc_p: "પ્લોટ નં. 45, ઇન્ડસ્ટ્રિયલ એરિયા ફેઝ II,<br>શહેરનું નામ, રાજ્ય - 123456",
-                form_name: "નામ",
+                cont_whatsapp: "WhatsApp",
+                chat_now: "ચેટ કરો",
+                cont_visit: "અમારી મુલાકાત લો",
+                address: "કરણ નગર રેલવે ક્રોસિંગ રોડ પાસે, કડી",
+                form_name: "તમારું નામ",
                 form_name_ph: "તમારું નામ લખો",
                 form_phone: "ફોન નંબર",
                 form_phone_ph: "+91 00000 00000",
