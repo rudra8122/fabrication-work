@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Gallery | Shri Ram Fabrication</title>
+    <meta name="description" content="Explore our portfolio of MS & SS fabrication projects, including industrial sheds, designer gates, security grills, and more.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'industrial-orange': '#FF6B00',
+                        'industrial-black': '#0A0A0A',
+                        'industrial-charcoal': '#121212',
+                        'industrial-gray': '#1A1A1A',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'heading': ['Oswald', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .glass {
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .gallery-item {
+            transition: all 0.4s ease;
+        }
+
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        #lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border: 2px solid #FF6B00;
+        }
+
+        [lang="gu"] .font-heading {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-industrial-black text-white font-sans selection:bg-industrial-orange selection:text-white">
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4 px-6 md:px-12 glass border-b border-white/5">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3 group cursor-pointer" onclick="window.location.href='index.html'">
+                <div class="w-10 h-10 bg-industrial-orange flex items-center justify-center rounded-sm rotate-45 group-hover:rotate-[135deg] transition-transform duration-500">
+                    <i class="fa-solid fa-hammer -rotate-45 group-hover:-rotate-[135deg] transition-transform duration-500 text-white"></i>
+                </div>
+                <span class="font-heading text-2xl font-bold tracking-wider uppercase">Shri Ram <span class="text-industrial-orange">Fabrication</span></span>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-8 font-heading text-lg">
+                <a href="index.html#hero" data-i18n="nav_home" class="hover:text-industrial-orange transition-colors">Home</a>
+                <a href="index.html#services" data-i18n="nav_services" class="hover:text-industrial-orange transition-colors">Services</a>
+                <a href="gallery.html" data-i18n="nav_gallery" class="text-industrial-orange hover:text-white transition-colors">Gallery</a>
+                <a href="index.html#why-us" data-i18n="nav_why_us" class="hover:text-industrial-orange transition-colors">Why Us</a>
+                <a href="index.html#contact" data-i18n="nav_contact" class="hover:text-industrial-orange transition-colors">Contact</a>
+
+                <!-- Language Switcher -->
+                <div class="flex items-center border border-white/20 rounded-full px-1 py-1 bg-industrial-black/50">
+                    <button onclick="setLanguage('en')" id="lang-en" class="px-3 py-1 rounded-full text-xs font-bold transition-all">EN</button>
+                    <button onclick="setLanguage('gu')" id="lang-gu" class="px-3 py-1 rounded-full text-xs font-bold transition-all">ગુજરાતી</button>
+                </div>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <div class="flex items-center space-x-4 md:hidden">
+                <button onclick="toggleLanguage()" class="text-xs font-bold bg-industrial-charcoal border border-white/10 px-2 py-1 rounded-sm">
+                    <span id="mobile-lang-text">ગુજરાતી</span>
+                </button>
+                <button id="menu-btn" class="text-3xl focus:outline-none">
+                    <i class="fa-solid fa-bars-staggered text-industrial-orange"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-industrial-charcoal border-b border-white/10 flex flex-col items-center py-8 space-y-6 md:hidden glass">
+            <a href="index.html#hero" data-i18n="nav_home" class="font-heading text-xl hover:text-industrial-orange transition-colors">Home</a>
+            <a href="index.html#services" data-i18n="nav_services" class="font-heading text-xl hover:text-industrial-orange transition-colors">Services</a>
+            <a href="gallery.html" data-i18n="nav_gallery" class="font-heading text-xl text-industrial-orange hover:text-white transition-colors">Gallery</a>
+            <a href="index.html#why-us" data-i18n="nav_why_us" class="font-heading text-xl hover:text-industrial-orange transition-colors">Why Us</a>
+            <a href="index.html#contact" data-i18n="nav_contact" class="font-heading text-xl hover:text-industrial-orange transition-colors">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="pt-32 pb-12 px-6 md:px-12 bg-industrial-charcoal border-b border-white/5">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 data-i18n="gallery_title" class="font-heading text-5xl md:text-6xl font-bold mb-4 uppercase">Project <span class="text-industrial-orange">Gallery</span></h1>
+            <p data-i18n="gallery_subtitle" class="text-gray-400 max-w-2xl mx-auto text-lg">Witness our craftsmanship in metal fabrication through our recent projects across residential and industrial sites.</p>
+        </div>
+    </header>
+
+    <!-- Gallery Section -->
+    <section class="py-16 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto">
+            
+            <!-- Filters -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12 reveal">
+                <button onclick="filterGallery('all')" class="filter-btn active bg-industrial-orange text-white px-6 py-2 rounded-sm font-heading font-bold uppercase transition-all" data-i18n="filter_all">All Projects</button>
+                <button onclick="filterGallery('gates')" class="filter-btn border border-white/20 hover:border-industrial-orange px-6 py-2 rounded-sm font-heading font-bold uppercase transition-all" data-i18n="filter_gates">Gates & Doors</button>
+                <button onclick="filterGallery('sheds')" class="filter-btn border border-white/20 hover:border-industrial-orange px-6 py-2 rounded-sm font-heading font-bold uppercase transition-all" data-i18n="filter_sheds">Industrial Sheds</button>
+                <button onclick="filterGallery('grills')" class="filter-btn border border-white/20 hover:border-industrial-orange px-6 py-2 rounded-sm font-heading font-bold uppercase transition-all" data-i18n="filter_grills">Security Grills</button>
+                <button onclick="filterGallery('railings')" class="filter-btn border border-white/20 hover:border-industrial-orange px-6 py-2 rounded-sm font-heading font-bold uppercase transition-all" data-i18n="filter_railings">Railings</button>
+                <button onclick="filterGallery('custom')" class="filter-btn border border-white/20 hover:border-industrial-orange px-6 py-2 rounded-sm font-heading font-bold uppercase transition-all" data-i18n="filter_custom">Custom Work</button>
+            </div>
+
+            <!-- Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-grid">
+                
+                <!-- Sheds -->
+                <div class="gallery-item reveal sheds" onclick="openLightbox(this)">
+                    <div class="relative overflow-hidden aspect-square rounded-sm bg-industrial-gray group cursor-zoom-in">
+                        <img src="WhatsApp Image 2026-05-02 at 22.59.30.jpeg" alt="Industrial Shed" class="w-full h-full object-cover transition-transform duration-500">
+                        <div class="overlay absolute inset-0 bg-industrial-black/60 opacity-0 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <h4 class="font-heading text-xl font-bold text-industrial-orange" data-i18n="gal_shed_1">Industrial Roof Shed</h4>
+                            <p class="text-sm text-gray-300" data-i18n="gal_view">Click to view full size</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item reveal sheds" onclick="openLightbox(this)">
+                    <div class="relative overflow-hidden aspect-square rounded-sm bg-industrial-gray group cursor-zoom-in">
+                        <img src="WhatsApp Image 2026-05-02 at 22.59.31.jpeg" alt="Factory Shed" class="w-full h-full object-cover transition-transform duration-500">
+                        <div class="overlay absolute inset-0 bg-industrial-black/60 opacity-0 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <h4 class="font-heading text-xl font-bold text-industrial-orange" data-i18n="gal_shed_2">Factory Structure</h4>
+                            <p class="text-sm text-gray-300" data-i18n="gal_view">Click to view full size</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gates & Doors -->
+                <div class="gallery-item reveal gates railings" onclick="openLightbox(this)">
+                    <div class="relative overflow-hidden aspect-square rounded-sm bg-industrial-gray group cursor-zoom-in">
+                        <img src="WhatsApp Image 2026-05-02 at 22.59.35.jpeg" alt="Designer Gate & Railing" class="w-full h-full object-cover transition-transform duration-500">
+                        <div class="overlay absolute inset-0 bg-industrial-black/60 opacity-0 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <h4 class="font-heading text-xl font-bold text-industrial-orange" data-i18n="gal_gate_1">Peacock Gate & SS Railing</h4>
+                            <p class="text-sm text-gray-300" data-i18n="gal_view">Click to view full size</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item reveal gates railings" onclick="openLightbox(this)">
+                    <div class="relative overflow-hidden aspect-square rounded-sm bg-industrial-gray group cursor-zoom-in">
+                        <img src="WhatsApp Image 2026-05-02 at 22.59.45.jpeg" alt="Main Entrance & Balcony Railing" class="w-full h-full object-cover transition-transform duration-500">
+                        <div class="overlay absolute inset-0 bg-industrial-black/60 opacity-0 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <h4 class="font-heading text-xl font-bold text-industrial-orange" data-i18n="gal_gate_3">Entrance Gate & Balcony Work</h4>
+                            <p class="text-sm text-gray-300" data-i18n="gal_view">Click to view full size</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item reveal gates" onclick="openLightbox(this)">
+                    <div class="relative overflow-hidden aspect-square rounded-sm bg-industrial-gray group cursor-zoom-in">
+                        <img src="WhatsApp Image 2026-05-02 at 22.59.40.jpeg" alt="Laser Cut Gate" class="w-full h-full object-cover transition-transform duration-500">
+                        <div class="overlay absolute inset-0 bg-industrial-black/60 opacity-0 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <h4 class="font-heading text-xl font-bold text-industrial-orange" data-i18n="gal_gate_2">Laser-Cut Main Entrance</h4>
+                            <p class="text-sm text-gray-300" data-i18n="gal_view">Click to view full size</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item reveal gates" onclick="openLightbox(this)">
+                    <div class="relative overflow-hidden aspect-square rounded-sm bg-industrial-gray group cursor-zoom-in">
+                        <img src="WhatsApp Image 2026-05-02 at 22.59.34.jpeg" alt="Safety Door" class="w-full h-full object-cover transition-transform duration-500">
+                        <div class="overlay absolute inset-0 bg-industrial-black/60 opacity-0 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <h4 class="font-heading text-xl font-bold text-industrial-orange" data-i18n="gal_door_1">MS Safety Door</h4>
+                            <p class="text-sm text-gray-300" data-i18n="gal_view">Click to view full size</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item reveal gates" onclick="openLightbox(this)">
+                    <div class="relative overflow-hidden aspect-square rounded-sm bg-industrial-gray group cursor-zoom-in">
+                        <img src="WhatsApp Image 2026-05-02 at 22.59.46.jpeg" alt="Security Gate" class="w-full h-full object-cover transition-transform duration-500">
+                        <div class="overlay absolute inset-0 bg-industrial-black/60 opacity-0 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <h4 class="font-heading text-xl font-bold text-industrial-orange" data-i18n="gal_door_2">Patterned Security Gate</h4>
+                            <p class="text-sm text-gray-300" data-i18n="gal_view">Click to view full size</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grills -->
+                <div class="gallery-item reveal grills" onclick="openLightbox(this)">
+                    <div class="relative overflow-hidden aspect-square rounded-sm bg-industrial-gray group cursor-zoom-in">
+                        <img src="WhatsApp Image 2026-05-02 at 22.59.32.jpeg" alt="Security Grill" class="w-full h-full object-cover transition-transform duration-500">
+                        <div class="overlay absolute inset-0 bg-industrial-black/60 opacity-0 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <h4 class="font-heading text-xl font-bold text-industrial-orange" data-i18n="gal_grill_1">Window Security Grill</h4>
+                            <p class="text-sm text-gray-300" data-i18n="gal_view">Click to view full size</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item reveal gates" onclick="openLightbox(this)">
+                    <div class="relative overflow-hidden aspect-square rounded-sm bg-industrial-gray group cursor-zoom-in">
+                        <img src="WhatsApp Image 2026-05-02 at 22.59.33.jpeg" alt="MS Gate Work" class="w-full h-full object-cover transition-transform duration-500">
+                        <div class="overlay absolute inset-0 bg-industrial-black/60 opacity-0 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <h4 class="font-heading text-xl font-bold text-industrial-orange" data-i18n="gal_fab_1">Site Fabrication Work</h4>
+                            <p class="text-sm text-gray-300" data-i18n="gal_view">Click to view full size</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item reveal grills" onclick="openLightbox(this)">
+                    <div class="relative overflow-hidden aspect-square rounded-sm bg-industrial-gray group cursor-zoom-in">
+                        <img src="WhatsApp Image 2026-05-033 at 22.59.31.jpeg" alt="Mesh Grill" class="w-full h-full object-cover transition-transform duration-500">
+                        <div class="overlay absolute inset-0 bg-industrial-black/60 opacity-0 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <h4 class="font-heading text-xl font-bold text-industrial-orange" data-i18n="gal_grill_2">Safety Mesh Grill</h4>
+                            <p class="text-sm text-gray-300" data-i18n="gal_view">Click to view full size</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item reveal custom" onclick="openLightbox(this)">
+                    <div class="relative overflow-hidden aspect-square rounded-sm bg-industrial-gray group cursor-zoom-in">
+                        <img src="WhatsApp Image 2026-05-222at 22.59.30.jpeg" alt="Metal Bunk Bed" class="w-full h-full object-cover transition-transform duration-500">
+                        <div class="overlay absolute inset-0 bg-industrial-black/60 opacity-0 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <h4 class="font-heading text-xl font-bold text-industrial-orange" data-i18n="gal_custom_1">MS Bunk Bed</h4>
+                            <p class="text-sm text-gray-300" data-i18n="gal_view">Click to view full size</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- What We Make Section -->
+    <section class="py-20 px-6 md:px-12 bg-industrial-gray border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <h2 data-i18n="wwe_title" class="font-heading text-4xl md:text-5xl font-bold mb-4 uppercase">What We <span class="text-industrial-orange">Make</span></h2>
+                <div class="w-24 h-1 bg-industrial-orange mx-auto"></div>
+                <p data-i18n="wwe_subtitle" class="mt-6 text-gray-400 max-w-2xl mx-auto">Our expertise covers a wide range of MS & SS fabrication services. Here is a breakdown of our core manufacturing capabilities.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Item 1: Window Grills -->
+                <div class="bg-industrial-charcoal p-4 rounded-sm border border-white/5 reveal">
+                    <img src="WhatsApp Image 2026-05-02 at 22.59.32.jpeg" class="w-full h-40 object-cover mb-4 rounded-sm opacity-60 grayscale hover:grayscale-0 transition-all">
+                    <h3 data-i18n="wwe_1_h" class="font-heading text-lg font-bold text-industrial-orange mb-1">Security Grills</h3>
+                    <p data-i18n="wwe_1_p" class="text-xs text-gray-400">Custom window and door grills for home security.</p>
+                </div>
+                <!-- Item 2: Main Gates -->
+                <div class="bg-industrial-charcoal p-4 rounded-sm border border-white/5 reveal" style="transition-delay: 50ms;">
+                    <img src="WhatsApp Image 2026-05-02 at 22.59.40.jpeg" class="w-full h-40 object-cover mb-4 rounded-sm opacity-60 grayscale hover:grayscale-0 transition-all">
+                    <h3 data-i18n="wwe_2_h" class="font-heading text-lg font-bold text-industrial-orange mb-1">Designer Gates</h3>
+                    <p data-i18n="wwe_2_p" class="text-xs text-gray-400">CNC laser-cut and manual designer entrance gates.</p>
+                </div>
+                <!-- Item 3: Industrial Sheds -->
+                <div class="bg-industrial-charcoal p-4 rounded-sm border border-white/5 reveal" style="transition-delay: 100ms;">
+                    <img src="WhatsApp Image 2026-05-02 at 22.59.30.jpeg" class="w-full h-40 object-cover mb-4 rounded-sm opacity-60 grayscale hover:grayscale-0 transition-all">
+                    <h3 data-i18n="wwe_3_h" class="font-heading text-lg font-bold text-industrial-orange mb-1">Roofing Sheds</h3>
+                    <p data-i18n="wwe_3_p" class="text-xs text-gray-400">Industrial warehouse and residential roof structures.</p>
+                </div>
+                <!-- Item 4: SS Railings -->
+                <div class="bg-industrial-charcoal p-4 rounded-sm border border-white/5 reveal" style="transition-delay: 150ms;">
+                    <img src="WhatsApp Image 2026-05-02 at 22.59.35.jpeg" class="w-full h-40 object-cover mb-4 rounded-sm opacity-60 grayscale hover:grayscale-0 transition-all">
+                    <h3 data-i18n="wwe_4_h" class="font-heading text-lg font-bold text-industrial-orange mb-1">SS Railings</h3>
+                    <p data-i18n="wwe_4_p" class="text-xs text-gray-400">Premium stainless steel balcony and staircase railings.</p>
+                </div>
+                <!-- Item 5: Safety Doors -->
+                <div class="bg-industrial-charcoal p-4 rounded-sm border border-white/5 reveal" style="transition-delay: 200ms;">
+                    <img src="WhatsApp Image 2026-05-02 at 22.59.34.jpeg" class="w-full h-40 object-cover mb-4 rounded-sm opacity-60 grayscale hover:grayscale-0 transition-all">
+                    <h3 data-i18n="wwe_5_h" class="font-heading text-lg font-bold text-industrial-orange mb-1">Safety Doors</h3>
+                    <p data-i18n="wwe_5_p" class="text-xs text-gray-400">Heavy-duty MS safety doors with mesh and grills.</p>
+                </div>
+                <!-- Item 6: Metal Furniture -->
+                <div class="bg-industrial-charcoal p-4 rounded-sm border border-white/5 reveal" style="transition-delay: 250ms;">
+                    <img src="WhatsApp Image 2026-05-222at 22.59.30.jpeg" class="w-full h-40 object-cover mb-4 rounded-sm opacity-60 grayscale hover:grayscale-0 transition-all">
+                    <h3 data-i18n="wwe_6_h" class="font-heading text-lg font-bold text-industrial-orange mb-1">Custom Furniture</h3>
+                    <p data-i18n="wwe_6_p" class="text-xs text-gray-400">Metal bunk beds, industrial racks, and shelving.</p>
+                </div>
+                <!-- Item 7: MS Frames -->
+                <div class="bg-industrial-charcoal p-4 rounded-sm border border-white/5 reveal" style="transition-delay: 300ms;">
+                    <img src="WhatsApp Image 2026-05-33at 22.59.44.jpeg" class="w-full h-40 object-cover mb-4 rounded-sm opacity-60 grayscale hover:grayscale-0 transition-all">
+                    <h3 data-i18n="wwe_7_h" class="font-heading text-lg font-bold text-industrial-orange mb-1">Structural Work</h3>
+                    <p data-i18n="wwe_7_p" class="text-xs text-gray-400">MS pipe framing and heavy structural fabrication.</p>
+                </div>
+                <!-- Item 8: Site Work -->
+                <div class="bg-industrial-charcoal p-4 rounded-sm border border-white/5 reveal" style="transition-delay: 350ms;">
+                    <img src="WhatsApp Image 2026-05-02 at 22.59.33.jpeg" class="w-full h-40 object-cover mb-4 rounded-sm opacity-60 grayscale hover:grayscale-0 transition-all">
+                    <h3 data-i18n="wwe_8_h" class="font-heading text-lg font-bold text-industrial-orange mb-1">Site Installation</h3>
+                    <p data-i18n="wwe_8_p" class="text-xs text-gray-400">Professional on-site welding and installation services.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div id="lightbox" onclick="closeLightbox()">
+        <button class="absolute top-8 right-8 text-white text-4xl hover:text-industrial-orange"><i class="fa-solid fa-xmark"></i></button>
+        <img id="lightbox-img" src="" alt="Full View">
+    </div>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-6 bg-industrial-orange text-white text-center">
+        <div class="max-w-4xl mx-auto">
+            <h2 data-i18n="gal_cta_title" class="font-heading text-4xl font-bold mb-6 uppercase">Inspired by our work?</h2>
+            <p data-i18n="gal_cta_p" class="text-xl mb-10 opacity-90">Let's discuss your custom metal fabrication project today.</p>
+            <a href="index.html#contact" data-i18n="btn_quote" class="bg-industrial-black hover:bg-white hover:text-industrial-black text-white px-10 py-4 rounded-sm font-heading font-bold text-lg transition-all">GET A FREE QUOTE</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-industrial-black border-t border-white/5 py-12 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-industrial-orange flex items-center justify-center rounded-sm rotate-45">
+                    <i class="fa-solid fa-hammer -rotate-45 text-white text-xs"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-heading text-xl font-bold tracking-wider uppercase">Shri Ram Fabrication</span>
+                    <span class="text-industrial-orange text-sm font-bold uppercase tracking-widest mt-1">Jignesh Gajjar</span>
+                </div>
+            </div>
+            <p data-i18n="footer_copy" class="text-gray-500 text-sm">© 2024 Shri Ram Fabrication. All Rights Reserved.</p>
+            <div class="flex space-x-6 text-xl justify-center">
+                <a href="#" class="hover:text-industrial-orange transition-colors"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" class="hover:text-industrial-orange transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="hover:text-industrial-orange transition-colors"><i class="fa-brands fa-google"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Translations
+        const translations = {
+            en: {
+                nav_home: "Home",
+                nav_services: "Services",
+                nav_gallery: "Gallery",
+                nav_why_us: "Why Us",
+                nav_contact: "Contact",
+                gallery_title: "Project <span class='text-industrial-orange'>Gallery</span>",
+                gallery_subtitle: "Witness our craftsmanship in metal fabrication through our recent projects across residential and industrial sites.",
+                filter_all: "All Projects",
+                filter_gates: "Gates & Doors",
+                filter_sheds: "Industrial Sheds",
+                filter_grills: "Security Grills",
+                filter_railings: "Railings",
+                filter_custom: "Custom Work",
+                gal_gate_prem: "Luxury Laser-Cut Gate",
+                gal_shed_prem: "Heavy Structural Shed",
+                gal_shed_1: "Industrial Roof Shed",
+                gal_shed_2: "Factory Structure",
+                gal_gate_1: "Peacock Gate & SS Railing",
+                gal_gate_3: "Entrance Gate & Balcony Work",
+                gal_gate_2: "Laser-Cut Main Entrance",
+                gal_door_1: "MS Safety Door",
+                gal_door_2: "Patterned Security Gate",
+                gal_grill_1: "Window Security Grill",
+                gal_grill_2: "Safety Mesh Grill",
+                gal_custom_1: "MS Bunk Bed",
+                gal_fab_1: "Site Fabrication Work",
+                wwe_title: "What We <span class='text-industrial-orange'>Make</span>",
+                wwe_subtitle: "Our expertise covers a wide range of MS & SS fabrication services. Here is a breakdown of our core manufacturing capabilities.",
+                wwe_1_h: "Security Grills",
+                wwe_1_p: "Custom window and door grills for home security.",
+                wwe_2_h: "Designer Gates",
+                wwe_2_p: "CNC laser-cut and manual designer entrance gates.",
+                wwe_3_h: "Roofing Sheds",
+                wwe_3_p: "Industrial warehouse and residential roof structures.",
+                wwe_4_h: "SS Railings",
+                wwe_4_p: "Premium stainless steel balcony and staircase railings.",
+                wwe_5_h: "Safety Doors",
+                wwe_5_p: "Heavy-duty MS safety doors with mesh and grills.",
+                wwe_6_h: "Custom Furniture",
+                wwe_6_p: "Metal bunk beds, industrial racks, and shelving.",
+                wwe_7_h: "Structural Work",
+                wwe_7_p: "MS pipe framing and heavy structural fabrication.",
+                wwe_8_h: "Site Installation",
+                wwe_8_p: "Professional on-site welding and installation services.",
+                gal_view: "Click to view full size",
+                gal_cta_title: "Inspired by our work?",
+                gal_cta_p: "Let's discuss your custom metal fabrication project today.",
+                btn_quote: "GET A FREE QUOTE",
+                footer_copy: "© 2024 Shri Ram Fabrication. All Rights Reserved."
+            },
+            gu: {
+                nav_home: "હોમ",
+                nav_services: "સેવાઓ",
+                nav_gallery: "ગેલેરી",
+                nav_why_us: "શા માટે અમે",
+                nav_contact: "સંપર્ક",
+                gallery_title: "પ્રોજેક્ટ <span class='text-industrial-orange'>ગેલેરી</span>",
+                gallery_subtitle: "રહેણાંક અને ઔદ્યોગિક સાઇટ્સ પરના અમારા તાજેતરના પ્રોજેક્ટ્સ દ્વારા મેટલ ફેબ્રિકેશનમાં અમારી કારીગરી જુઓ.",
+                filter_all: "બધા પ્રોજેક્ટ્સ",
+                filter_gates: "ગેટ અને દરવાજા",
+                filter_sheds: "ઔદ્યોગિક શેડ",
+                filter_grills: "સુરક્ષા ગ્રીલ",
+                filter_railings: "રેલિંગ (Railings)",
+                filter_custom: "કસ્ટમ કામ",
+                gal_gate_prem: "લક્ઝરી લેસર-કટ ગેટ",
+                gal_shed_prem: "હેવી સ્ટ્રક્ચરલ શેડ",
+                gal_shed_1: "ઔદ્યોગિક રૂફ શેડ",
+                gal_shed_2: "ફેક્ટરી સ્ટ્રક્ચર",
+                gal_gate_1: "પીકોક ગેટ અને SS રેલિંગ",
+                gal_gate_3: "પ્રવેશદ્વાર અને બાલ્કની કામ",
+                gal_gate_2: "લેસર-કટ મુખ્ય પ્રવેશદ્વાર",
+                gal_door_1: "MS સેફ્ટી ડોર",
+                gal_door_2: "પેટર્નવાળો સુરક્ષા ગેટ",
+                gal_grill_1: "બારીની સુરક્ષા ગ્રીલ",
+                gal_grill_2: "સેફ્ટી મેશ ગ્રીલ",
+                gal_custom_1: "MS બંક બેડ",
+                gal_fab_1: "સાઇટ ફેબ્રિકેશન કામ",
+                wwe_title: "અમે શું <span class='text-industrial-orange'>બનાવીએ છીએ</span>",
+                wwe_subtitle: "અમારી કુશળતા MS અને SS ફેબ્રિકેશન સેવાઓની વિશાળ શ્રેણીને આવરી લે છે. અહીં અમારી મુખ્ય ઉત્પાદન ક્ષમતાઓની વિગતો છે.",
+                wwe_1_h: "સુરક્ષા ગ્રીલ",
+                wwe_1_p: "ઘરની સુરક્ષા માટે કસ્ટમ બારી અને દરવાજાની ગ્રીલ.",
+                wwe_2_h: "ડિઝાઇનર ગેટ",
+                wwe_2_p: "CNC લેસર-કટ અને મેન્યુઅલ ડિઝાઇનર પ્રવેશદ્વાર ગેટ.",
+                wwe_3_h: "રૂફિંગ શેડ",
+                wwe_3_p: "ઔદ્યોગિક વેરહાઉસ અને રહેણાંક છતના સ્ટ્રક્ચર્સ.",
+                wwe_4_h: "SS રેલિંગ",
+                wwe_4_p: "પ્રીમિયમ સ્ટેનલેસ સ્ટીલ બાલ્કની અને દાદરની રેલિંગ.",
+                wwe_5_h: "સેફ્ટી ડોર",
+                wwe_5_p: "મેશ અને ગ્રીલ સાથેના હેવી-ડ્યુટી MS સેફ્ટી ડોર.",
+                wwe_6_h: "કસ્ટમ ફર્નિચર",
+                wwe_6_p: "મેટલ બંક બેડ, ઔદ્યોગિક રેક્સ અને શેલ્વિંગ.",
+                wwe_7_h: "સ્ટ્રક્ચરલ કામ",
+                wwe_7_p: "MS પાઇપ ફ્રેમિંગ અને હેવી સ્ટ્રક્ચરલ ફેબ્રિકેશન.",
+                wwe_8_h: "સાઇટ ઇન્સ્ટોલેશન",
+                wwe_8_p: "વ્યાવસાયિક ઓન-સાઇટ વેલ્ડિંગ અને ઇન્સ્ટોલેશન સેવાઓ.",
+                gal_view: "મોટું જોવા માટે ક્લિક કરો",
+                gal_cta_title: "અમારું કામ ગમ્યું?",
+                gal_cta_p: "ચાલો આજે જ તમારા કસ્ટમ મેટલ ફેબ્રિકેશન પ્રોજેક્ટ વિશે ચર્ચા કરીએ.",
+                btn_quote: "મફત ક્વોટ મેળવો",
+                footer_copy: "© 2024 શ્રી રામ ફેબ્રિકેશન. સર્વાધિકાર સુરક્ષિત."
+            }
+        };
+
+        let currentLang = localStorage.getItem('lang') || 'en';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('lang', lang);
+            document.documentElement.lang = lang;
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+
+            // Update UI
+            document.getElementById('mobile-lang-text').innerText = lang === 'en' ? 'ગુજરાતી' : 'English';
+            document.getElementById('lang-en').className = `px-3 py-1 rounded-full text-xs font-bold transition-all ${lang === 'en' ? 'bg-industrial-orange text-white' : 'text-gray-400'}`;
+            document.getElementById('lang-gu').className = `px-3 py-1 rounded-full text-xs font-bold transition-all ${lang === 'gu' ? 'bg-industrial-orange text-white' : 'text-gray-400'}`;
+        }
+
+        function toggleLanguage() {
+            setLanguage(currentLang === 'en' ? 'gu' : 'en');
+        }
+
+        // Gallery Filtering
+        function filterGallery(category) {
+            const items = document.querySelectorAll('.gallery-item');
+            const btns = document.querySelectorAll('.filter-btn');
+            
+            btns.forEach(btn => btn.classList.remove('bg-industrial-orange', 'text-white'));
+            event.target.classList.add('bg-industrial-orange', 'text-white');
+
+            items.forEach(item => {
+                if (category === 'all' || item.classList.contains(category)) {
+                    item.style.display = 'block';
+                    setTimeout(() => item.style.opacity = '1', 10);
+                } else {
+                    item.style.opacity = '0';
+                    setTimeout(() => item.style.display = 'none', 400);
+                }
+            });
+        }
+
+        // Lightbox
+        function openLightbox(el) {
+            const imgSrc = el.querySelector('img').src;
+            document.getElementById('lightbox-img').src = imgSrc;
+            document.getElementById('lightbox').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            setLanguage(currentLang);
+            
+            // Intersection Observer for reveal
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+            // Mobile Menu
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        });
+    </script>
+</body>
+</html>

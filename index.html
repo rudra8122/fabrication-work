@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shri Ram Fabrication | Precision Metalwork & Installation</title>
+    <meta name="description"
+        content="Professional MS & SS fabrication, installation, and custom metalwork by Shri Ram Fabrication. Quality grills, railings, gates, and industrial structures.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Oswald:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        industrial: {
+                            black: '#0a0a0a',
+                            charcoal: '#121212',
+                            orange: '#ff6600',
+                            yellow: '#ffcc00',
+                            gray: '#1e1e1e',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Oswald', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .glass {
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.4), rgba(10, 10, 10, 0.9));
+        }
+
+        [lang="gu"] .font-heading {
+            font-family: 'Inter', sans-serif;
+            /* Gujarati looks better with clean sans */
+        }
+    </style>
+</head>
+
+<body class="bg-industrial-black text-white font-sans selection:bg-industrial-orange selection:text-white">
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-industrial-orange flex items-center justify-center rounded-sm rotate-45">
+                    <i class="fa-solid fa-hammer -rotate-45 text-white"></i>
+                </div>
+                <span class="font-heading text-2xl font-bold tracking-wider uppercase">Shri Ram <span
+                        class="text-industrial-orange">Fabrication</span></span>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-8 font-heading text-lg">
+                <a href="index.html#hero" data-i18n="nav_home" class="text-industrial-orange hover:text-white transition-colors">Home</a>
+                <a href="index.html#services" data-i18n="nav_services"
+                    class="hover:text-industrial-orange transition-colors">Services</a>
+                <a href="gallery.html" data-i18n="nav_gallery" class="hover:text-industrial-orange transition-colors">Gallery</a>
+                <a href="index.html#why-us" data-i18n="nav_why_us" class="hover:text-industrial-orange transition-colors">Why
+                    Us</a>
+                <a href="index.html#contact" data-i18n="nav_contact"
+                    class="hover:text-industrial-orange transition-colors">Contact</a>
+
+                <!-- Language Switcher -->
+                <div class="flex items-center border border-white/20 rounded-full px-1 py-1 bg-industrial-black/50">
+                    <button onclick="setLanguage('en')" id="lang-en"
+                        class="px-3 py-1 rounded-full text-xs font-bold transition-all bg-industrial-orange">EN</button>
+                    <button onclick="setLanguage('gu')" id="lang-gu"
+                        class="px-3 py-1 rounded-full text-xs font-bold transition-all text-gray-400">ગુજરાતી</button>
+                </div>
+            </div>
+
+            <div class="hidden md:block">
+                <a href="tel:+919924005319" data-i18n="call_now"
+                    class="bg-industrial-orange hover:bg-white hover:text-industrial-black px-6 py-2 rounded-sm font-heading font-bold transition-all duration-300">
+                    CALL NOW
+                </a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <div class="flex items-center space-x-4 md:hidden">
+                <button onclick="toggleLanguage()"
+                    class="text-xs font-bold bg-industrial-charcoal border border-white/10 px-2 py-1 rounded-sm">
+                    <span id="mobile-lang-text">ગુજરાતી</span>
+                </button>
+                <button id="menu-btn" class="text-3xl focus:outline-none">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="hidden absolute top-full left-0 w-full bg-industrial-charcoal border-b border-white/10 flex flex-col items-center py-8 space-y-6 md:hidden glass">
+            <a href="index.html#hero" data-i18n="nav_home"
+                class="font-heading text-xl text-industrial-orange hover:text-white transition-colors">Home</a>
+            <a href="index.html#services" data-i18n="nav_services"
+                class="font-heading text-xl hover:text-industrial-orange transition-colors">Services</a>
+            <a href="gallery.html" data-i18n="nav_gallery"
+                class="font-heading text-xl hover:text-industrial-orange transition-colors">Gallery</a>
+            <a href="index.html#why-us" data-i18n="nav_why_us"
+                class="font-heading text-xl hover:text-industrial-orange transition-colors">Why Us</a>
+            <a href="index.html#contact" data-i18n="nav_contact"
+                class="font-heading text-xl hover:text-industrial-orange transition-colors">Contact</a>
+            <a href="tel:+919924005319" data-i18n="call_now"
+                class="bg-industrial-orange text-white px-8 py-3 rounded-sm font-heading font-bold">CALL NOW</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="hero.png" alt="Industrial Metal Fabrication" class="w-full h-full object-cover">
+            <div class="absolute inset-0 hero-gradient"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-6 max-w-4xl">
+            <h1 data-i18n="hero_title"
+                class="font-heading text-5xl md:text-7xl font-bold mb-6 tracking-tight leading-tight reveal">
+                PRECISION METAL <br> <span class="text-industrial-orange">FABRICATION & INSTALLATION</span>
+            </h1>
+            <p data-i18n="hero_subtitle" class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto reveal"
+                style="transition-delay: 200ms;">
+                Delivering high-quality MS & SS custom metalwork for residential, commercial, and industrial projects
+                with unmatched craftsmanship.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal"
+                style="transition-delay: 400ms;">
+                <a href="#contact" data-i18n="btn_quote"
+                    class="w-full sm:w-auto bg-industrial-orange hover:bg-white hover:text-industrial-black text-white px-10 py-4 rounded-sm font-heading font-bold text-lg transition-all duration-300 shadow-lg shadow-industrial-orange/20">
+                    GET A FREE QUOTE
+                </a>
+                <a href="#services" data-i18n="btn_services"
+                    class="w-full sm:w-auto border border-white/30 hover:border-industrial-orange hover:text-industrial-orange px-10 py-4 rounded-sm font-heading font-bold text-lg transition-all duration-300 backdrop-blur-sm">
+                    OUR SERVICES
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 px-6 md:px-12 bg-industrial-charcoal">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <h2 data-i18n="services_title" class="font-heading text-4xl md:text-5xl font-bold mb-4 uppercase">Expert
+                    <span class="text-industrial-orange">Services</span>
+                </h2>
+                <div class="w-24 h-1 bg-industrial-orange mx-auto"></div>
+                <p data-i18n="services_subtitle" class="mt-6 text-gray-400 max-w-2xl mx-auto">From security grills to
+                    massive industrial sheds, we handle all MS & SS fabrication needs with precision.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Grills -->
+                <div
+                    class="bg-industrial-gray p-8 rounded-sm border-l-4 border-industrial-orange hover:translate-y-[-10px] transition-all duration-300 reveal group">
+                    <div class="text-industrial-orange text-4xl mb-6 group-hover:scale-110 transition-transform"><i
+                            class="fa-solid fa-shield-halved"></i></div>
+                    <h3 data-i18n="svc_grills_h" class="font-heading text-2xl font-bold mb-4">Grills & Security</h3>
+                    <ul class="text-gray-400 space-y-2">
+                        <li data-i18n="svc_grills_1"><i
+                                class="fa-solid fa-check text-industrial-orange mr-2 text-xs"></i> Window & Door Grills
+                        </li>
+                        <li data-i18n="svc_grills_2"><i
+                                class="fa-solid fa-check text-industrial-orange mr-2 text-xs"></i> Security & Safety
+                            Grills</li>
+                        <li data-i18n="svc_grills_3"><i
+                                class="fa-solid fa-check text-industrial-orange mr-2 text-xs"></i> Custom Pattern
+                            Designs</li>
+                    </ul>
+                </div>
+
+                <!-- Railings -->
+                <div class="bg-industrial-gray p-8 rounded-sm border-l-4 border-industrial-orange hover:translate-y-[-10px] transition-all duration-300 reveal group"
+                    style="transition-delay: 100ms;">
+                    <div class="text-industrial-orange text-4xl mb-6 group-hover:scale-110 transition-transform"><i
+                            class="fa-solid fa-grip-lines-vertical"></i></div>
+                    <h3 data-i18n="svc_railings_h" class="font-heading text-2xl font-bold mb-4">Railings</h3>
+                    <ul class="text-gray-400 space-y-2">
+                        <li data-i18n="svc_railings_1"><i
+                                class="fa-solid fa-check text-industrial-orange mr-2 text-xs"></i> SS & MS Balcony
+                            Railing</li>
+                        <li data-i18n="svc_railings_2"><i
+                                class="fa-solid fa-check text-industrial-orange mr-2 text-xs"></i> Staircase Railings
+                        </li>
+                        <li data-i18n="svc_railings_3"><i
+                                class="fa-solid fa-check text-industrial-orange mr-2 text-xs"></i> Modern Glass & Metal
+                            Designs</li>
+                    </ul>
+                </div>
+
+                <!-- Gates & Doors -->
+                <div class="bg-industrial-gray p-8 rounded-sm border-l-4 border-industrial-orange hover:translate-y-[-10px] transition-all duration-300 reveal group"
+                    style="transition-delay: 200ms;">
+                    <div class="text-industrial-orange text-4xl mb-6 group-hover:scale-110 transition-transform"><i
+                            class="fa-solid fa-door-open"></i></div>
+                    <h3 data-i18n="svc_gates_h" class="font-heading text-2xl font-bold mb-4">Gates & Doors</h3>
+                    <ul class="text-gray-400 space-y-2">
+                        <li data-i18n="svc_gates_1"><i
+                                class="fa-solid fa-check text-industrial-orange mr-2 text-xs"></i> Main Entrance Gates
+                        </li>
+                        <li data-i18n="svc_gates_2"><i
+                                class="fa-solid fa-check text-industrial-orange mr-2 text-xs"></i> MS Security & Flush
+                            Doors</li>
+                        <li data-i18n="svc_gates_3"><i
+                                class="fa-solid fa-check text-industrial-orange mr-2 text-xs"></i> Industrial &
+                            Pedestrian Gates</li>
+                    </ul>
+                </div>
+
+                <!-- Shade Structures -->
+                <div class="bg-industrial-gray p-8 rounded-sm border-l-4 border-industrial-orange hover:translate-y-[-10px] transition-all duration-300 reveal group"
+                    style="transition-delay: 300ms;">
+                    <div class="text-industrial-orange text-4xl mb-6 group-hover:scale-110 transition-transform"><i
+                            class="fa-solid fa-umbrella"></i></div>
+                    <h3 data-i18n="svc_shades_h" class="font-heading text-2xl font-bold mb-4">Shade Structures</h3>
+                    <ul class="text-gray-400 space-y-2">
+                        <li data-i18n="svc_shades_1"><i
+                                class="fa-solid fa-check text-industrial-orange mr-2 text-xs"></i> Balcony & Terrace
+                            Shades</li>
+                        <li data-i18n="svc_shades_2"><i
+                                class="fa-solid fa-check text-industrial-orange mr-2 text-xs"></i> MS Factory &
+                            Industrial Sheds</li>
+                        <li data-i18n="svc_shades_3"><i
+                                class="fa-solid fa-check text-industrial-orange mr-2 text-xs"></i> Sunshades & Staircase
+                            Covers</li>
+                    </ul>
+                </div>
+
+                <!-- Drainage -->
+                <div class="bg-industrial-gray p-8 rounded-sm border-l-4 border-industrial-orange hover:translate-y-[-10px] transition-all duration-300 reveal group"
+                    style="transition-delay: 400ms;">
+                    <div class="text-industrial-orange text-4xl mb-6 group-hover:scale-110 transition-transform"><i
+                            class="fa-solid fa-droplet"></i></div>
+                    <h3 data-i18n="svc_drainage_h" class="font-heading text-2xl font-bold mb-4">Drainage Solutions</h3>
+                    <ul class="text-gray-400 space-y-2">
+                        <li data-i18n="svc_drainage_1"><i
+                                class="fa-solid fa-check text-industrial-orange mr-2 text-xs"></i> Rain Water Channels
+                        </li>
+                        <li data-i18n="svc_drainage_2"><i
+                                class="fa-solid fa-check text-industrial-orange mr-2 text-xs"></i> Roof Drainage &
+                            Downpipes</li>
+                        <li data-i18n="svc_drainage_3"><i
+                                class="fa-solid fa-check text-industrial-orange mr-2 text-xs"></i> Rainwater Downspouts
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Fabrication -->
+                <div class="bg-industrial-gray p-8 rounded-sm border-l-4 border-industrial-orange hover:translate-y-[-10px] transition-all duration-300 reveal group"
+                    style="transition-delay: 500ms;">
+                    <div class="text-industrial-orange text-4xl mb-6 group-hover:scale-110 transition-transform"><i
+                            class="fa-solid fa-gear"></i></div>
+                    <h3 data-i18n="svc_fab_h" class="font-heading text-2xl font-bold mb-4">Fabrication Work</h3>
+                    <ul class="text-gray-400 space-y-2">
+                        <li data-i18n="svc_fab_1"><i class="fa-solid fa-check text-industrial-orange mr-2 text-xs"></i>
+                            On-Site Installation & Welding</li>
+                        <li data-i18n="svc_fab_2"><i class="fa-solid fa-check text-industrial-orange mr-2 text-xs"></i>
+                            Custom MS & SS Structural Work</li>
+                        <li data-i18n="svc_fab_3"><i class="fa-solid fa-check text-industrial-orange mr-2 text-xs"></i>
+                            Cutting, Bending & Drilling</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Materials Section -->
+    <section id="materials" class="py-24 px-6 md:px-12 relative overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="ss-sheet.png" alt="Metal Texture" class="w-full h-full object-cover opacity-10">
+            <div class="absolute inset-0 bg-industrial-black/80"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="mb-16 reveal">
+                <h2 data-i18n="materials_title" class="font-heading text-4xl md:text-5xl font-bold mb-4 uppercase">Metal
+                    <span class="text-industrial-orange">Sheets & Materials</span>
+                </h2>
+                <div class="w-24 h-1 bg-industrial-orange"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- MS Sheet -->
+                <div class="glass p-6 rounded-sm reveal">
+                    <h4 data-i18n="mat_ms_h" class="font-heading text-xl font-bold text-industrial-orange mb-2">MS Sheet
+                        (Mild Steel)</h4>
+                    <p data-i18n="mat_ms_p" class="text-gray-400 text-sm">Versatile for general fabrication, structural
+                        supports, and heavy-duty industrial framing.</p>
+                </div>
+                <!-- GI Sheet -->
+                <div class="glass p-6 rounded-sm reveal">
+                    <h4 data-i18n="mat_gi_h" class="font-heading text-xl font-bold text-industrial-orange mb-2">GI Sheet
+                        (Galvanized Iron)</h4>
+                    <p data-i18n="mat_gi_p" class="text-gray-400 text-sm">Rust-resistant sheets perfect for roofing,
+                        ducting, and outdoor enclosures.</p>
+                </div>
+                <!-- SS Sheet -->
+                <div class="glass p-6 rounded-sm reveal">
+                    <h4 data-i18n="mat_ss_h" class="font-heading text-xl font-bold text-industrial-orange mb-2">SS Sheet
+                        (304 / 316)</h4>
+                    <p data-i18n="mat_ss_p" class="text-gray-400 text-sm">Premium stainless steel for high-hygiene
+                        areas, kitchenware, and luxury railings.</p>
+                </div>
+                <!-- Chequered Plate -->
+                <div class="glass p-6 rounded-sm reveal">
+                    <h4 data-i18n="mat_cheq_h" class="font-heading text-xl font-bold text-industrial-orange mb-2">
+                        Chequered Plate</h4>
+                    <p data-i18n="mat_cheq_p" class="text-gray-400 text-sm">Anti-slip flooring for factories, ramps,
+                        staircases, and vehicle flooring.</p>
+                </div>
+                <!-- Perforated Sheet -->
+                <div class="glass p-6 rounded-sm reveal">
+                    <h4 data-i18n="mat_perf_h" class="font-heading text-xl font-bold text-industrial-orange mb-2">
+                        Perforated Sheet</h4>
+                    <p data-i18n="mat_perf_p" class="text-gray-400 text-sm">Used for ventilation, architectural screens,
+                        and filtration systems.</p>
+                </div>
+                <!-- Expanded Metal -->
+                <div class="glass p-6 rounded-sm reveal">
+                    <h4 data-i18n="mat_exp_h" class="font-heading text-xl font-bold text-industrial-orange mb-2">
+                        Expanded Metal Mesh</h4>
+                    <p data-i18n="mat_exp_p" class="text-gray-400 text-sm">Strong, lightweight mesh for security
+                        fencing, partitions, and walkways.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Models Section -->
+    <section class="py-24 px-6 md:px-12 bg-industrial-gray border-y border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <h2 data-i18n="work_title" class="font-heading text-4xl md:text-5xl font-bold mb-4 uppercase">Flexible <span class="text-industrial-orange">Working Models</span></h2>
+                <div class="w-24 h-1 bg-industrial-orange mx-auto"></div>
+                <p data-i18n="work_subtitle" class="mt-6 text-gray-400 max-w-2xl mx-auto">We adapt to your needs, offering various contracting and service options for every type of project.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Model 1 -->
+                <div class="bg-industrial-charcoal p-8 rounded-sm border-t-2 border-industrial-orange reveal">
+                    <div class="text-industrial-orange text-3xl mb-4"><i class="fa-solid fa-layer-group"></i></div>
+                    <h3 data-i18n="work_1_h" class="font-heading text-xl font-bold mb-3">Material Options</h3>
+                    <p data-i18n="work_1_p" class="text-gray-400 text-sm">We accept both <strong>Labour Only</strong> contracts or <strong>With Raw Material</strong> (Full Contract) projects.</p>
+                </div>
+                <!-- Model 3 -->
+                <div class="bg-industrial-charcoal p-8 rounded-sm border-t-2 border-industrial-orange reveal" style="transition-delay: 100ms;">
+                    <div class="text-industrial-orange text-3xl mb-4"><i class="fa-solid fa-ruler-combined"></i></div>
+                    <h3 data-i18n="work_3_h" class="font-heading text-xl font-bold mb-3">All Project Sizes</h3>
+                    <p data-i18n="work_3_p" class="text-gray-400 text-sm">No job is too small or too big. We handle <strong>minor home repairs</strong> to <strong>massive industrial sheds</strong>.</p>
+                </div>
+                <!-- Model 4 -->
+                <div class="bg-industrial-charcoal p-8 rounded-sm border-t-2 border-industrial-orange reveal" style="transition-delay: 200ms;">
+                    <div class="text-industrial-orange text-3xl mb-4"><i class="fa-solid fa-truck-fast"></i></div>
+                    <h3 data-i18n="work_4_h" class="font-heading text-xl font-bold mb-3">On-Visit Services</h3>
+                    <p data-i18n="work_4_p" class="text-gray-400 text-sm">Available for miscellaneous household work, site measurements, and expert consultations on visit.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section id="why-us" class="py-24 px-6 md:px-12 bg-industrial-orange text-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <h2 data-i18n="why_us_title" class="font-heading text-4xl md:text-5xl font-bold mb-4 uppercase">Why
+                    Choose <span class="text-industrial-black">Shri Ram Fabrication?</span></h2>
+                <div class="w-24 h-1 bg-white mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 text-center">
+                <div class="reveal">
+                    <div class="text-4xl mb-4"><i class="fa-solid fa-truck-fast"></i></div>
+                    <h4 data-i18n="why_1" class="font-heading font-bold text-lg uppercase">On-Time Delivery</h4>
+                </div>
+                <div class="reveal" style="transition-delay: 100ms;">
+                    <div class="text-4xl mb-4"><i class="fa-solid fa-award"></i></div>
+                    <h4 data-i18n="why_2" class="font-heading font-bold text-lg uppercase">Quality Materials</h4>
+                </div>
+                <div class="reveal" style="transition-delay: 200ms;">
+                    <div class="text-4xl mb-4"><i class="fa-solid fa-user-gear"></i></div>
+                    <h4 data-i18n="why_3" class="font-heading font-bold text-lg uppercase">Expert Welders</h4>
+                </div>
+                <div class="reveal" style="transition-delay: 300ms;">
+                    <div class="text-4xl mb-4"><i class="fa-solid fa-ruler-combined"></i></div>
+                    <h4 data-i18n="why_4" class="font-heading font-bold text-lg uppercase">Custom Sizing</h4>
+                </div>
+                <div class="reveal" style="transition-delay: 400ms;">
+                    <div class="text-4xl mb-4"><i class="fa-solid fa-compass-drafting"></i></div>
+                    <h4 data-i18n="why_5" class="font-heading font-bold text-lg uppercase">Site Measurement</h4>
+                </div>
+                <div class="reveal" style="transition-delay: 500ms;">
+                    <div class="text-4xl mb-4"><i class="fa-solid fa-tags"></i></div>
+                    <h4 data-i18n="why_6" class="font-heading font-bold text-lg uppercase">Competitive Price</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6 md:px-12 bg-industrial-charcoal">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <div class="reveal">
+                <h2 data-i18n="contact_title" class="font-heading text-4xl md:text-5xl font-bold mb-6 uppercase">Get A
+                    <span class="text-industrial-orange">Free Quote</span>
+                </h2>
+                <p data-i18n="contact_subtitle" class="text-gray-400 mb-10 text-lg">Contact us today for on-site
+                    measurements and a detailed estimate for your fabrication project.</p>
+
+                <div class="space-y-6">
+                    <div class="flex items-start space-x-4">
+                        <div
+                            class="bg-industrial-orange w-12 h-12 flex items-center justify-center rounded-sm shrink-0">
+                            <i class="fa-solid fa-user-tie text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 data-i18n="cont_owner" class="font-heading text-xl font-bold">Name</h4>
+                            <p class="text-gray-400">Jignesh Gajjar</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div
+                            class="bg-industrial-orange w-12 h-12 flex items-center justify-center rounded-sm shrink-0">
+                            <i class="fa-solid fa-phone text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 data-i18n="cont_call" class="font-heading text-xl font-bold">Call Us</h4>
+                            <p class="text-gray-400">+91 9924005319</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="bg-green-600 w-12 h-12 flex items-center justify-center rounded-sm shrink-0">
+                            <i class="fa-brands fa-whatsapp text-2xl"></i>
+                        </div>
+                        <div>
+                            <h4 data-i18n="cont_wa" class="font-heading text-xl font-bold">WhatsApp</h4>
+                            <p data-i18n="cont_wa_p" class="text-gray-400">Message for quick estimate</p>
+                            <a href="https://wa.me/919924005319" data-i18n="cont_chat"
+                                class="text-industrial-orange font-bold hover:underline">Chat Now</a>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div
+                            class="bg-industrial-orange w-12 h-12 flex items-center justify-center rounded-sm shrink-0">
+                            <i class="fa-solid fa-location-dot text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 data-i18n="cont_loc" class="font-heading text-xl font-bold">Our Location</h4>
+                            <p data-i18n="cont_loc_p" class="text-gray-400">Plot No. 45, Industrial Area Phase
+                                II,<br>City Name, State - 123456</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-industrial-gray p-8 rounded-sm border border-white/10 reveal"
+                style="transition-delay: 200ms;">
+                <form class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label data-i18n="form_name" class="block text-sm font-bold uppercase mb-2">Name</label>
+                            <input type="text" data-i18n-ph="form_name_ph"
+                                class="w-full bg-industrial-black border border-white/10 px-4 py-3 rounded-sm focus:outline-none focus:border-industrial-orange transition-colors"
+                                placeholder="John Doe">
+                        </div>
+                        <div>
+                            <label data-i18n="form_phone" class="block text-sm font-bold uppercase mb-2">Phone
+                                Number</label>
+                            <input type="tel" data-i18n-ph="form_phone_ph"
+                                class="w-full bg-industrial-black border border-white/10 px-4 py-3 rounded-sm focus:outline-none focus:border-industrial-orange transition-colors"
+                                placeholder="+91 00000 00000">
+                        </div>
+                    </div>
+                    <div>
+                        <label data-i18n="form_req" class="block text-sm font-bold uppercase mb-2">Requirement</label>
+                        <select
+                            class="w-full bg-industrial-black border border-white/10 px-4 py-3 rounded-sm focus:outline-none focus:border-industrial-orange transition-colors">
+                            <option data-i18n="opt_1">MS Fabrication</option>
+                            <option data-i18n="opt_2">SS Fabrication</option>
+                            <option data-i18n="opt_3">Gate & Security</option>
+                            <option data-i18n="opt_4">Shade / Shed Work</option>
+                            <option data-i18n="opt_5">Custom Metalwork</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label data-i18n="form_msg" class="block text-sm font-bold uppercase mb-2">Message</label>
+                        <textarea rows="4" data-i18n-ph="form_msg_ph"
+                            class="w-full bg-industrial-black border border-white/10 px-4 py-3 rounded-sm focus:outline-none focus:border-industrial-orange transition-colors"
+                            placeholder="Tell us about your project..."></textarea>
+                    </div>
+                    <button type="submit" data-i18n="form_btn"
+                        class="w-full bg-industrial-orange hover:bg-white hover:text-industrial-black text-white px-8 py-4 rounded-sm font-heading font-bold text-lg transition-all duration-300">
+                        SEND QUOTE REQUEST
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-industrial-black border-t border-white/5 py-12 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-industrial-orange flex items-center justify-center rounded-sm rotate-45">
+                    <i class="fa-solid fa-hammer -rotate-45 text-white text-xs"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-heading text-xl font-bold tracking-wider uppercase">Shri Ram Fabrication</span>
+                    <span class="text-industrial-orange text-sm font-bold uppercase tracking-widest mt-1"><span
+                            data-i18n="footer_owner">Prop.</span> Jignesh Gajjar</span>
+                </div>
+            </div>
+
+            <p data-i18n="footer_copy" class="text-gray-500 text-sm">© 2024 Shri Ram Fabrication. All Rights Reserved.
+            </p>
+
+            <div class="flex space-x-6 text-xl">
+                <a href="#" class="hover:text-industrial-orange transition-colors"><i
+                        class="fa-brands fa-facebook"></i></a>
+                <a href="#" class="hover:text-industrial-orange transition-colors"><i
+                        class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="hover:text-industrial-orange transition-colors"><i
+                        class="fa-brands fa-google"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Fixed Buttons for Mobile -->
+    <div class="fixed bottom-6 right-6 flex flex-col space-y-4 z-40 md:hidden">
+        <a href="https://wa.me/919924005319"
+            class="w-14 h-14 bg-green-600 text-white rounded-full flex items-center justify-center text-3xl shadow-xl">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="tel:+919924005319"
+            class="w-14 h-14 bg-industrial-orange text-white rounded-full flex items-center justify-center text-2xl shadow-xl">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        const translations = {
+            en: {
+                nav_home: "Home",
+                nav_services: "Services",
+                nav_gallery: "Gallery",
+                nav_materials: "Materials",
+                nav_why_us: "Why Us",
+                nav_contact: "Contact",
+                call_now: "CALL NOW",
+                hero_title: "PRECISION METAL <br> <span class='text-industrial-orange'>FABRICATION & INSTALLATION</span>",
+                hero_subtitle: "Delivering high-quality MS & SS custom metalwork for residential, commercial, and industrial projects with unmatched craftsmanship.",
+                btn_quote: "GET A FREE QUOTE",
+                btn_services: "OUR SERVICES",
+                services_title: "Expert <span class='text-industrial-orange'>Services</span>",
+                services_subtitle: "From security grills to massive industrial sheds, we handle all MS & SS fabrication needs with precision.",
+                svc_grills_h: "Grills & Security",
+                svc_grills_1: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> Window & Door Grills",
+                svc_grills_2: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> Security & Safety Grills",
+                svc_grills_3: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> Custom Pattern Designs",
+                svc_railings_h: "Railings",
+                svc_railings_1: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> SS & MS Balcony Railing",
+                svc_railings_2: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> Staircase Railings",
+                svc_railings_3: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> Modern Glass & Metal Designs",
+                svc_gates_h: "Gates & Doors",
+                svc_gates_1: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> Main Entrance Gates",
+                svc_gates_2: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> MS Security & Flush Doors",
+                svc_gates_3: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> Industrial & Pedestrian Gates",
+                svc_shades_h: "Shade Structures",
+                svc_shades_1: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> Balcony & Terrace Shades",
+                svc_shades_2: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> MS Factory & Industrial Sheds",
+                svc_shades_3: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> Sunshades & Staircase Covers",
+                svc_drainage_h: "Drainage Solutions",
+                svc_drainage_1: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> Rain Water Channels",
+                svc_drainage_2: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> Roof Drainage & Downpipes",
+                svc_drainage_3: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> Rainwater Downspouts",
+                svc_fab_h: "Fabrication Work",
+                svc_fab_1: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> On-Site Installation & Welding",
+                svc_fab_2: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> Custom MS & SS Structural Work",
+                svc_fab_3: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> Cutting, Bending & Drilling",
+                materials_title: "Metal <span class='text-industrial-orange'>Sheets & Materials</span>",
+                mat_ms_h: "MS Sheet (Mild Steel)",
+                mat_ms_p: "Versatile for general fabrication, structural supports, and heavy-duty industrial framing.",
+                mat_gi_h: "GI Sheet (Galvanized Iron)",
+                mat_gi_p: "Rust-resistant sheets perfect for roofing, ducting, and outdoor enclosures.",
+                mat_ss_h: "SS Sheet (304 / 316)",
+                mat_ss_p: "Premium stainless steel for high-hygiene areas, kitchenware, and luxury railings.",
+                mat_cheq_h: "Chequered Plate",
+                mat_cheq_p: "Anti-slip flooring for factories, ramps, staircases, and vehicle flooring.",
+                mat_perf_h: "Perforated Sheet",
+                mat_perf_p: "Used for ventilation, architectural screens, and filtration systems.",
+                mat_exp_h: "Expanded Metal Mesh",
+                mat_exp_p: "Strong, lightweight mesh for security fencing, partitions, and walkways.",
+                why_us_title: "Why Choose <span class='text-industrial-black'>Shri Ram Fabrication?</span>",
+                why_1: "On-Time Delivery",
+                why_2: "Quality Materials",
+                why_3: "Expert Welders",
+                why_4: "Custom Sizing",
+                why_5: "Site Measurement",
+                why_6: "Competitive Price",
+                work_title: "Flexible <span class='text-industrial-orange'>Working Models</span>",
+                work_subtitle: "We adapt to your needs, offering various contracting and service options for every type of project.",
+                work_1_h: "Material Options",
+                work_1_p: "We accept both <strong>Labour Only</strong> contracts or <strong>With Raw Material</strong> (Full Contract) projects.",
+                work_3_h: "All Project Sizes",
+                work_3_p: "No job is too small or too big. We handle <strong>minor home repairs</strong> to <strong>massive industrial sheds</strong>.",
+                work_4_h: "On-Visit Services",
+                work_4_p: "Available for miscellaneous household work, site measurements, and expert consultations on visit.",
+                contact_title: "Get A <span class='text-industrial-orange'>Free Quote</span>",
+                contact_subtitle: "Contact us today for on-site measurements and a detailed estimate for your fabrication project.",
+                cont_call: "Call Us",
+                cont_wa: "WhatsApp",
+                cont_wa_p: "Message for quick estimate",
+                cont_chat: "Chat Now",
+                cont_owner: "Name",
+                cont_loc: "Our Location",
+                cont_loc_p: "Plot No. 45, Industrial Area Phase II,<br>City Name, State - 123456",
+                form_name: "Name",
+                form_name_ph: "John Doe",
+                form_phone: "Phone Number",
+                form_phone_ph: "+91 00000 00000",
+                form_req: "Requirement",
+                opt_1: "MS Fabrication",
+                opt_2: "SS Fabrication",
+                opt_3: "Gate & Security",
+                opt_4: "Shade / Shed Work",
+                opt_5: "Custom Metalwork",
+                form_msg: "Message",
+                form_msg_ph: "Tell us about your project...",
+                form_btn: "SEND QUOTE REQUEST",
+                footer_owner: "Prop.",
+                footer_copy: "© 2024 Shri Ram Fabrication. All Rights Reserved."
+            },
+            gu: {
+                nav_home: "હોમ",
+                nav_services: "સેવાઓ",
+                nav_gallery: "ગેલેરી",
+                nav_materials: "સામગ્રી",
+                nav_why_us: "શા માટે અમે",
+                nav_contact: "સંપર્ક",
+                call_now: "કોલ કરો",
+                hero_title: "મજબૂત અને ટકાઉ મેટલ <br> <span class='text-industrial-orange'>ફેબ્રિકેશન અને ઇન્સ્ટોલેશન</span>",
+                hero_subtitle: "અમે રહેણાંક, વ્યાપારી અને ઔદ્યોગિક પ્રોજેક્ટ્સ માટે ઉત્તમ કારીગરી સાથે ઉચ્ચ ગુણવત્તાનું MS અને SS કસ્ટમ મેટલવર્ક પ્રદાન કરીએ છીએ.",
+                btn_quote: "મફત ક્વોટ મેળવો",
+                btn_services: "અમારી સેવાઓ",
+                services_title: "અમારી નિષ્ણાત <span class='text-industrial-orange'>સેવાઓ</span>",
+                services_subtitle: "સુરક્ષા ગ્રીલથી લઈને વિશાળ ઔદ્યોગિક શેડ સુધી, અમે તમામ MS અને SS ફેબ્રિકેશનની જરૂરિયાતો ચોકસાઇ સાથે પૂરી કરીએ છીએ.",
+                svc_grills_h: "ગ્રીલ અને સુરક્ષા",
+                svc_grills_1: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> બારી અને દરવાજાની ગ્રીલ",
+                svc_grills_2: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> સુરક્ષા અને સેફ્ટી ગ્રીલ",
+                svc_grills_3: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> કસ્ટમ પેટર્ન ડિઝાઇન",
+                svc_railings_h: "રેલિંગ",
+                svc_railings_1: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> SS અને MS બાલ્કની રેલિંગ",
+                svc_railings_2: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> દાદર (Staircase) રેલિંગ",
+                svc_railings_3: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> આધુનિક ગ્લાસ અને મેટલ ડિઝાઇન",
+                svc_gates_h: "ગેટ અને દરવાજા",
+                svc_gates_1: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> મુખ્ય પ્રવેશદ્વાર (Main Gate)",
+                svc_gates_2: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> MS સુરક્ષા અને ફ્લશ દરવાજા",
+                svc_gates_3: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> ઔદ્યોગિક અને પેડેસ્ટ્રિયન ગેટ",
+                svc_shades_h: "શેડ સ્ટ્રક્ચર્સ",
+                svc_shades_1: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> બાલ્કની અને ટેરેસ શેડ",
+                svc_shades_2: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> MS ફેક્ટરી અને ઇન્ડસ્ટ્રિયલ શેડ",
+                svc_shades_3: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> સનશેડ અને દાદર કવર",
+                svc_drainage_h: "ડ્રેનેજ સોલ્યુશન્સ",
+                svc_drainage_1: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> વરસાદી પાણીની ચેનલો",
+                svc_drainage_2: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> રૂફ ડ્રેનેજ અને ડાઉનપાઇપ્સ",
+                svc_drainage_3: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> રેઈનવોટર ડાઉનસ્પોટ્સ",
+                svc_fab_h: "ફેબ્રિકેશન કામ",
+                svc_fab_1: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> ઓન-સાઇટ ઇન્સ્ટોલેશન અને વેલ્ડિંગ",
+                svc_fab_2: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> કસ્ટમ MS અને SS સ્ટ્રક્ચરલ કામ",
+                svc_fab_3: "<i class='fa-solid fa-check text-industrial-orange mr-2 text-xs'></i> કટિંગ, બેન્ડિંગ અને ડ્રિલિંગ",
+                materials_title: "મેટલ <span class='text-industrial-orange'>શીટ્સ અને સામગ્રી</span>",
+                mat_ms_h: "MS શીટ (માઈલ્ડ સ્ટીલ)",
+                mat_ms_p: "સામાન્ય ફેબ્રિકેશન, સ્ટ્રક્ચરલ સપોર્ટ અને હેવી-ડ્યુટી ફ્રેમિંગ માટે ઉપયોગી.",
+                mat_gi_h: "GI શીટ (ગેલ્વેનાઈઝ્ડ આયર્ન)",
+                mat_gi_p: "છત, ડક્ટિંગ અને આઉટડોર બિડાણ માટે ઉત્તમ કાટ-પ્રતિરોધક શીટ્સ.",
+                mat_ss_h: "SS શીટ (304 / 316)",
+                mat_ss_p: "ઉચ્ચ સ્વચ્છતા વિસ્તારો, રસોડાનાં સાધનો અને લક્ઝરી રેલિંગ માટે પ્રીમિયમ સ્ટીલ.",
+                mat_cheq_h: "ચેકર્ડ પ્લેટ",
+                mat_cheq_p: "ફેક્ટરીઓ, રેમ્પ, દાદર અને વાહનોના ફ્લોરિંગ માટે એન્ટી-સ્લિપ ફ્લોરિંગ.",
+                mat_perf_h: "પરફોરેટેડ શીટ",
+                mat_perf_p: "વેન્ટિલેશન, આર્કિટેક્ચરલ સ્ક્રીન્સ અને ફિલ્ટરેશન સિસ્ટમ્સ માટે વપરાય છે.",
+                mat_exp_h: "એક્સપાન્ડેડ મેટલ મેશ",
+                mat_exp_p: "સુરક્ષા ફેન્સીંગ, પાર્ટીશનો અને વોકવે માટે મજબૂત અને હળવી મેશ.",
+                why_us_title: "શા માટે <span class='text-industrial-black'>શ્રી રામ ફેબ્રિકેશન પસંદ કરો?</span>",
+                why_1: "સમયસર ડિલિવરી",
+                why_2: "ગુણવત્તાયુક્ત સામગ્રી",
+                why_3: "નિષ્ણાત વેલ્ડર્સ",
+                why_4: "કસ્ટમ સાઇઝિંગ",
+                why_5: "સાઇટ માપણી",
+                why_6: "સ્પર્ધાત્મક ભાવ",
+                work_title: "કામ કરવાની <span class='text-industrial-orange'>વિવિધ પદ્ધતિઓ</span>",
+                work_subtitle: "અમે તમારી જરૂરિયાતો મુજબ અનુકૂલન કરીએ છીએ, દરેક પ્રકારના પ્રોજેક્ટ માટે વિવિધ વિકલ્પો પ્રદાન કરીએ છીએ.",
+                work_1_h: "મટીરીયલના વિકલ્પો",
+                work_1_p: "અમે <strong>ફક્ત મજૂરી (Labour Only)</strong> અથવા <strong>મટીરીયલ સાથે (Full Contract)</strong> બંને પ્રકારના કામ સ્વીકારીએ છીએ.",
+                work_3_h: "દરેક પ્રકારના કામ",
+                work_3_p: "કોઈ કામ નાનું કે મોટું નથી. અમે <strong>ઘરના નાના સમારકામ</strong> થી લઈને <strong>વિશાળ ઔદ્યોગિક શેડ</strong> સુધીનું કામ કરીએ છીએ.",
+                work_4_h: "મુલાકાત સેવાઓ",
+                work_4_p: "પરચૂરણ ઘરકામ, સાઇટ માપણી અને નિષ્ણાત સલાહ માટે મુલાકાત સેવાઓ ઉપલબ્ધ છે.",
+                contact_title: "મફત <span class='text-industrial-orange'>ક્વોટ મેળવો</span>",
+                contact_subtitle: "તમારા ફેબ્રિકેશન પ્રોજેક્ટ માટે ઓન-સાઇટ માપણી અને વિગતવાર અંદાજ માટે આજે જ અમારો સંપર્ક કરો.",
+                cont_call: "અમને કોલ કરો",
+                cont_wa: "WhatsApp",
+                cont_wa_p: "ઝડપી અંદાજ માટે મેસેજ કરો",
+                cont_chat: "ચેટ કરો",
+                cont_owner: "નામ",
+                cont_loc: "અમારું સ્થાન",
+                cont_loc_p: "પ્લોટ નં. 45, ઇન્ડસ્ટ્રિયલ એરિયા ફેઝ II,<br>શહેરનું નામ, રાજ્ય - 123456",
+                form_name: "નામ",
+                form_name_ph: "તમારું નામ લખો",
+                form_phone: "ફોન નંબર",
+                form_phone_ph: "+91 00000 00000",
+                form_req: "જરૂરિયાત",
+                opt_1: "MS ફેબ્રિકેશન",
+                opt_2: "SS ફેબ્રિકેશન",
+                opt_3: "ગેટ અને સુરક્ષા",
+                opt_4: "શેડ / શેડ કામ",
+                opt_5: "કસ્ટમ મેટલવર્ક",
+                form_msg: "સંદેશ",
+                form_msg_ph: "તમારા પ્રોજેક્ટ વિશે જણાવો...",
+                form_btn: "ક્વોટ વિનંતી મોકલો",
+                footer_owner: "નામ",
+                footer_copy: "© 2024 શ્રી રામ ફેબ્રિકેશન. સર્વાધિકાર સુરક્ષિત."
+            }
+        };
+
+        let currentLang = localStorage.getItem('lang') || 'en';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('lang', lang);
+            document.documentElement.lang = lang;
+
+            // Update Text content
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+
+            // Update Placeholders
+            document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+                const key = el.getAttribute('data-i18n-ph');
+                if (translations[lang][key]) {
+                    el.placeholder = translations[lang][key];
+                }
+            });
+
+            // Update UI buttons
+            const btnEn = document.getElementById('lang-en');
+            const btnGu = document.getElementById('lang-gu');
+            const mobileText = document.getElementById('mobile-lang-text');
+
+            if (lang === 'en') {
+                btnEn.classList.add('bg-industrial-orange');
+                btnEn.classList.remove('text-gray-400');
+                btnGu.classList.remove('bg-industrial-orange');
+                btnGu.classList.add('text-gray-400');
+                mobileText.textContent = "ગુજરાતી";
+            } else {
+                btnGu.classList.add('bg-industrial-orange');
+                btnGu.classList.remove('text-gray-400');
+                btnEn.classList.remove('bg-industrial-orange');
+                btnEn.classList.add('text-gray-400');
+                mobileText.textContent = "EN";
+            }
+        }
+
+        function toggleLanguage() {
+            setLanguage(currentLang === 'en' ? 'gu' : 'en');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            setLanguage(currentLang);
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('glass', 'py-2');
+                navbar.classList.remove('py-4');
+            } else {
+                navbar.classList.remove('glass', 'py-2');
+                navbar.classList.add('py-4');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Reveal animations on scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+    </script>
+</body>
+
+</html>
